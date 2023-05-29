@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutriAppyWPF2", "NutriAppyWPF2.csproj", "{AF37817D-521F-4A2C-9918-72AF7177BCDF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AF37817D-521F-4A2C-9918-72AF7177BCDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF37817D-521F-4A2C-9918-72AF7177BCDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF37817D-521F-4A2C-9918-72AF7177BCDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF37817D-521F-4A2C-9918-72AF7177BCDF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0360AC01-9023-4CAA-AA66-05EEAE7CBADB}
+	EndGlobalSection
+EndGlobal
