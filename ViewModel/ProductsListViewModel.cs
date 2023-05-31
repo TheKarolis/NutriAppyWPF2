@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace NutriAppyWPF2.ViewModel
 {
-    class ProductsListViewModel
+    class ProductsListViewModel : BindableBase
     {
+
     }
 }

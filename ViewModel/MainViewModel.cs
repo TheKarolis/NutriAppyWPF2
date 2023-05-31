@@ -19,6 +19,7 @@ namespace NutriAppyWPF2.ViewModel
 
         private CommonInfoViewModel _CommonInfoViewModel = new CommonInfoViewModel();
         private NutrientViewModel _NutrientViewModel = new NutrientViewModel();
+        private ProductsListViewModel _ProductsListViewModel = new ProductsListViewModel();
 
         private BindableBase _CurrentViewModel;
         private BindableBase _LeftViewModel;
