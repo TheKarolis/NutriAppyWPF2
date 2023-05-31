@@ -13,8 +13,8 @@ namespace NutriAppyWPF2.ViewModel
             NavCommand = new MyICommand<string>(OnNav);
             LeftViewNavCommand = new MyICommand<string>(OnLeftNav);
 
-            CurrentViewModel = NutrientViewModel;
-            LeftViewModel = NutrientViewModel;
+            CurrentViewModel = ProductsListViewModel;
+            LeftViewModel = CommonInfoViewModel;
         }
 
         private CommonInfoViewModel _CommonInfoViewModel = new CommonInfoViewModel();
@@ -24,9 +24,17 @@ namespace NutriAppyWPF2.ViewModel
         private BindableBase _CurrentViewModel;
         private BindableBase _LeftViewModel;
 
+        public CommonInfoViewModel CommonInfoViewModel
+        {
+            get => _CommonInfoViewModel;
+        }
         public NutrientViewModel NutrientViewModel
         {
             get => _NutrientViewModel;
+        }
+        public ProductsListViewModel ProductsListViewModel
+        {
+            get => _ProductsListViewModel;
         }
 
         public BindableBase CurrentViewModel
