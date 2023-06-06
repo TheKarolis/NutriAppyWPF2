@@ -54,7 +54,8 @@ namespace NutriAppyWPF2.ViewModel
         private void OnNav(string destination)
         {
             DBLogic dBLogic = new DBLogic();
-            dBLogic.readAllProds();
+            dBLogic.ReadAllProductIds();
+            dBLogic.ReadAllProds();
             switch (destination)
             {
                 case "Nutrients":

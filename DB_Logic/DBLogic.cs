@@ -9,16 +9,42 @@ namespace NutriAppyWPF2.DB_Logic
 {
     internal class DBLogic
     {
-        private const string querySelectAllProductsPossible = "SELECT AmountsPerProduct.AmountLeft, Nutrient.Name, Product.Name" +
+        private const string querySelectAllProductsPossible = "SELECT Product.Name, Nutrient.Name, AmountsPerProduct.AmountLeft, Nutrient.Unit" +
             " FROM (AmountsPerProduct " +
             "INNER JOIN Nutrient on AmountsPerProduct.LeftId = Nutrient.Id)" +
             "INNER JOIN Product on AmountsPerProduct.RightId = Product.Id";
-        private const string tmpQr = "SELECT * FROM AmountsPerProduct";
+        private const string querySelectProductIds = "SELECT Product.Id FROM Product";
+        private const string tmpQr = "SELECT * FROM AmountsPerProduct";//For testing
         public DBLogic() { }
-        
-        public void readAllProds()
+
+        private List<int> prodIds = new(); 
+        private SQLiteConnection connection = new SQLiteConnection("Data Source = DB_Logic\\FoodDB.db");
+
+        public void ReadAllProductIds()
         {
-            SQLiteConnection connection = new SQLiteConnection("Data Source = DB_Logic\\FoodDB.db");
+            try
+            {
+                connection.Open();
+                SQLiteCommand command = new SQLiteCommand(querySelectProductIds, connection);
+                var reader = command.ExecuteReader();
+                //prodIds
+                while (reader.Read())
+                {
+                    prodIds.Add(reader.GetInt32(0));
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally { connection.Close(); }
+
+        }
+
+        
+        public void ReadAllProds()
+        {
             connection.Open();
 
             SQLiteCommand command = new SQLiteCommand(querySelectAllProductsPossible, connection);
