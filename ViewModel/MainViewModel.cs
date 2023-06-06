@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NutriAppyWPF2.DB_Logic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -52,6 +53,9 @@ namespace NutriAppyWPF2.ViewModel
         public MyICommand<string> LeftViewNavCommand { get; private set; }
         private void OnNav(string destination)
         {
+            DBLogic dBLogic = new DBLogic();
+            dBLogic.ReadAllProductIds();
+            dBLogic.ReadAllProds();
             switch (destination)
             {
                 case "Nutrients":
