@@ -10,6 +10,13 @@ namespace NutriAppyWPF2.ViewModel
 {
     class ProductsListViewModel : BindableBase
     {
+
+        public void loadExmplData()
+        {
+            Products.Add(new Product("Dog", "Not cat"));
+            var xd = nameof(Products);
+            OnPropertyChanged(nameof(Products));
+        }
         public ObservableCollection<Product> Products { get; set; }
            = new ObservableCollection<Product>();
 

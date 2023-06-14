@@ -117,7 +117,7 @@ namespace NutriAppyWPF2.DB_Logic
             prodIds = ReadAllProductIds();
             prodIds.ForEach(id => { products.Add(GetProductInfoById(id)); });
 
-            return null;
+            return products;
         }
     }
 

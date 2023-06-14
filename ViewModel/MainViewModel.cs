@@ -64,8 +64,9 @@ namespace NutriAppyWPF2.ViewModel
             switch (destination)
             {
                 case "Nutrients":
-                    CurrentViewModel = _NutrientViewModel;
-                    NutrientViewModel.LoadExampleNutrients();
+                    CurrentViewModel = _ProductsListViewModel;
+                    ProductsListViewModel.loadExmplData();
+                    //NutrientViewModel.LoadExampleNutrients();
                     break;
                 case "CommonInfo":
                 default:
