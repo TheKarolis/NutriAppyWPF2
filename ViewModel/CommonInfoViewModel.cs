@@ -12,12 +12,17 @@ namespace NutriAppyWPF2.ViewModel
     {
         public CommonInfoViewModel() { }
 
-        public ObservableCollection<Nutrient> Nutrients { get; set; }
+        public ObservableCollection<Nutrient> Nutrients { get; private set; }
             = new ObservableCollection<Nutrient>();
 
         public CommonInfoViewModel(ObservableCollection<Nutrient> Nutrients)
         {
             this.Nutrients = Nutrients;
+        }
+
+        public void updateNutrients(List<Nutrient> NutrientsNew)
+        {
+            this.Nutrients = new ObservableCollection<Nutrient>(NutrientsNew);
         }
     }
 }

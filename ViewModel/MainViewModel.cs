@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using NutriAppyWPF2.Model;
 using System.Threading.Tasks;
 
 namespace NutriAppyWPF2.ViewModel
@@ -16,11 +17,15 @@ namespace NutriAppyWPF2.ViewModel
 
             CurrentViewModel = ProductsListViewModel;
             LeftViewModel = CommonInfoViewModel;
+
+            AddProductsFromDb();
         }
 
         private CommonInfoViewModel _CommonInfoViewModel = new CommonInfoViewModel();
         private NutrientViewModel _NutrientViewModel = new NutrientViewModel();
         private ProductsListViewModel _ProductsListViewModel = new ProductsListViewModel();
+
+        private List<Product> PossibleProducts = new List<Product>();
 
         private BindableBase _CurrentViewModel;
         private BindableBase _LeftViewModel;
@@ -54,8 +59,8 @@ namespace NutriAppyWPF2.ViewModel
         private void OnNav(string destination)
         {
             DBLogic dBLogic = new DBLogic();
-            dBLogic.ReadAllProductIds();
-            dBLogic.ReadAllProds();
+            //dBLogic.ReadAllProductIds();
+            //dBLogic.ReadAllProds();
             switch (destination)
             {
                 case "Nutrients":
@@ -83,5 +88,10 @@ namespace NutriAppyWPF2.ViewModel
             }
         }
 
+        private void AddProductsFromDb()
+        {
+            DBLogic dBLogic = new DBLogic();
+            PossibleProducts = dBLogic.ReadAllPossibleProducts();
+        }
     }
 }
