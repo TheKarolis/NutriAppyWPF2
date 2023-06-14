@@ -21,6 +21,10 @@
         <DataTemplate DataType="{x:Type vm:NutrientViewModel}">
             <local:NutrientView/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vm:ProductsListViewModel}">
+            <local:ProductsListView/>
+        </DataTemplate>
     </Window.Resources>
     
     <Grid>
