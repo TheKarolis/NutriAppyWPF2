@@ -37,9 +37,10 @@
 
         <!--<views:CommonInfoView x:Name="CommonInfoControl"/>-->
         <ContentControl Grid.Column="0" Content="{Binding LeftViewModel}"/>
-        <ContentControl Grid.Column="1" Content="{Binding CurrentViewModel}"/>
+        <ContentControl Grid.Column="1" Content="{Binding RightViewModel}"/>
         
-        <Button Content = "CommonInfo" 
+        <!--For testing-->
+        <!--<Button Content = "CommonInfo" 
             Command = "{Binding NavCommand}"
             CommandParameter = "CommonInfo" 
             Grid.Column = "2" />
@@ -47,10 +48,6 @@
         <Button Content = "Nutrients" 
             Command = "{Binding NavCommand}" 
             CommandParameter = "Nutrients" 
-            Grid.Column = "3" />
-
-
-        <!--<views:CommonInfoView x:Name="CommonInfoControl"/>
-        <views:NutrientView Grid.Column="1" x:Name="NutrientControl"/>-->
+            Grid.Column = "3" />-->
     </Grid>
 </Window>

@@ -24,23 +24,9 @@ namespace NutriAppyWPF2
         public MainWindow()
         {
             InitializeComponent();
-            
-            //CommonInfoViewModel commonInfoViewModel = new CommonInfoViewModel(2);
-            //NutrientViewModel nutrientViewModel = new NutrientViewModel(2);
-            //MainViewModel mainViewModel = new MainViewModel(commonInfoViewModel, nutrientViewModel);
+
             MainViewModel mainViewModel = new MainViewModel();
             DataContext = mainViewModel;
-            //CommonInfoControl.DataContext = mainViewModel.CommonInfoViewModel;
-            //NutrientControl.DataContext = mainViewModel.NutrientViewModel;
-
         }
-
-        //private void NutrientViewControl_Loaded(object sender, RoutedEventArgs e)
-        //{
-        //    NutrientViewModel nutrientViewModel = new NutrientViewModel();
-        //    nutrientViewModel.LoadExampleNutrients();
-
-        //    NutrientViewControl.DataContext = nutrientViewModel;
-        //}
     }
 }

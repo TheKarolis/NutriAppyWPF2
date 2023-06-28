@@ -7,9 +7,6 @@
              xmlns:vm="clr-namespace:NutriAppyWPF2.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.DataContext>
-        <vm:ProductsListViewModel/>
-    </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -23,22 +20,16 @@
             </Grid.ColumnDefinitions>
             <Button Grid.Column="1"
                     Margin="10,0,0,0"
+                    Command="{Binding AddProductCommand}"
                     Content="Add product"/>
         </Grid>
         <Grid x:Name="ProdListView" Grid.Row="1">
-            <ListView>
+            <ListView ItemsSource="{Binding Products}">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Width="80">
-                            <GridViewColumn.Header>
-                                <TextBlock Text="Name" HorizontalAlignment="left"/>
-                            </GridViewColumn.Header>
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock HorizontalAlignment="Left" Text="Koldunai"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
+                        <GridViewColumn Width="Auto" Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                        <GridViewColumn Width="Auto" Header="Description" DisplayMemberBinding="{Binding Description}"/>
+                        <!--<GridViewColumn Width="Auto" Header="Nutrients" DisplayMemberBinding="{Binding Nutrients}"/>-->
                     </GridView>
                 </ListView.View>
             </ListView>

@@ -13,17 +13,14 @@ namespace NutriAppyWPF2.Model
         private decimal amount;
         private string unit;
 
-        public string Name { get => name; }
-        //public decimal Amount { get => amount; }
-        public string Unit { get => unit; }
-
         public Nutrient(string name, decimal amount, string unit)
         {
             this.name = name;
             this.amount = amount;
             this.unit = unit;
         }
-
+        public string Name { get => name; }
+        public string Unit { get => unit; }
         public decimal Amount
         {
             get { return amount; }

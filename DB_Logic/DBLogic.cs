@@ -10,6 +10,9 @@ namespace NutriAppyWPF2.DB_Logic
 {
     internal class DBLogic
     {
+        /// <summary>
+        /// Queries
+        /// </summary>
         private const string querySelectAllProductsPossible = "SELECT Product.Id, Nutrient.Name, AmountsPerProduct.AmountLeft, Nutrient.Unit" +
             " FROM (AmountsPerProduct " +
             "INNER JOIN Nutrient on AmountsPerProduct.LeftId = Nutrient.Id)" +
@@ -25,6 +28,10 @@ namespace NutriAppyWPF2.DB_Logic
         
         private SQLiteConnection connection = new SQLiteConnection("Data Source = DB_Logic\\FoodDB.db");
 
+        /// <summary>
+        /// Get IDs of all prerecorded products
+        /// </summary>
+        /// <returns>List of product ids</returns>
         public List<int> ReadAllProductIds()
         {
             List<int> prodIds = new(); 
@@ -42,13 +49,18 @@ namespace NutriAppyWPF2.DB_Logic
             }
             catch (Exception ex)
             {
-
+                //Logging to be added
             }
             finally { connection.Close(); }
 
             return prodIds;
         }
 
+        /// <summary>
+        /// Get product with an exact ID
+        /// </summary>
+        /// <param name="id">product id</param>
+        /// <returns>Product object</returns>
         private Product GetProductInfoById(int id)
         {
             connection.Open();
@@ -56,36 +68,39 @@ namespace NutriAppyWPF2.DB_Logic
             SQLiteCommand commandForNutrientValues = new SQLiteCommand(querySelectAllProductsPossible + " WHERE Product.Id == " + id, connection);
 
             SQLiteCommand commandForName = new SQLiteCommand(querySelectFirstProduct + " WHERE Product.Id == " + id + " LIMIT 1", connection);
-
-            var reader = commandForName.ExecuteReader();
-            Product newProduct = new();
-            while (reader.Read())
+            try
             {
-                
-                var idvar = reader.GetValue(0);
-                var name = reader.GetString(1);
-                var desc = reader.GetString(2);
+                var reader = commandForName.ExecuteReader();
+                Product newProduct = new();
+                while (reader.Read())
+                {
+                    var idvar = reader.GetValue(0);
+                    var name = reader.GetString(1);
+                    var desc = reader.GetString(2);
+                    newProduct = new Product(name, desc);
+                }
+                reader = commandForNutrientValues.ExecuteReader();
+                while (reader.Read())
+                {
+                    string nutrientName = reader.GetString(1);
+                    decimal amountPerProduct = reader.GetDecimal(2);
+                    string unit = reader.GetString(3);
+                    newProduct.addNutrient(new Nutrient(nutrientName, amountPerProduct, unit));
 
-
-                //var d = reader.GetValue(5);
-                //var e = reader.GetValue(5);
-                //var f = reader.GetValue(6);
-                //strings.Add(reader.GetValue(1));
-                newProduct = new Product(name, desc);
+                }
+                connection.Close();
+                return newProduct;
             }
-            reader = commandForNutrientValues.ExecuteReader();
-            while (reader.Read())
+            catch (Exception ex)
             {
-                string nutrientName = reader.GetString(1);
-                decimal amountPerProduct = reader.GetDecimal(2);
-                string unit = reader.GetString(3);
-                newProduct.addNutrient(new Nutrient(nutrientName, amountPerProduct, unit));
-
+                //Logging to be implemented
             }
-            connection.Close();
-            return newProduct;
+            return null;
         }
         
+        /// <summary>
+        /// For future usage
+        /// </summary>
         public void ReadAllProds()
         {
             connection.Open();
@@ -103,13 +118,14 @@ namespace NutriAppyWPF2.DB_Logic
                 var b = reader.GetValue(2);
                 var c = reader.GetValue(3);
                 var d = reader.GetValue(4);
-                //var e = reader.GetValue(5);
-                //var f = reader.GetValue(6);
-                //strings.Add(reader.GetValue(1));
             }
             connection.Close();
         }
 
+        /// <summary>
+        /// Get all prerecorded products
+        /// </summary>
+        /// <returns>products</returns>
         public List<Product> ReadAllPossibleProducts()
         {
             List<Product> products = new List<Product>();

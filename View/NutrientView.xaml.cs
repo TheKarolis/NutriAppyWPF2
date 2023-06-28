@@ -24,8 +24,6 @@ namespace NutriAppyWPF2.View
         public NutrientView()
         {
             InitializeComponent();
-            //this.DataContext = new NutrientViewModel();
         }
-
     }
 }

@@ -10,25 +10,32 @@ namespace NutriAppyWPF2.ViewModel
 {
     class MainViewModel : BindableBase
     {
-        public MainViewModel()
-        {
-            NavCommand = new MyICommand<string>(OnNav);
-            LeftViewNavCommand = new MyICommand<string>(OnLeftNav);
-
-            CurrentViewModel = ProductsListViewModel;
-            LeftViewModel = CommonInfoViewModel;
-
-            AddProductsFromDb();
-        }
-
         private CommonInfoViewModel _CommonInfoViewModel = new CommonInfoViewModel();
         private NutrientViewModel _NutrientViewModel = new NutrientViewModel();
         private ProductsListViewModel _ProductsListViewModel = new ProductsListViewModel();
 
         private List<Product> PossibleProducts = new List<Product>();
 
-        private BindableBase _CurrentViewModel;
+        private BindableBase _RightViewModel;
         private BindableBase _LeftViewModel;
+
+        /// <summary>
+        /// Database logic
+        /// </summary>
+        DBLogic dbContext = new DBLogic();
+
+        public MainViewModel()
+        {
+            dbContext = new DBLogic();
+            NavCommand = new MyICommand<string>(OnNav);
+            LeftViewNavCommand = new MyICommand<string>(OnLeftNav);
+
+            RightViewModel = ProductsListViewModel;
+            LeftViewModel = CommonInfoViewModel;
+            ProductsListViewModel.loadExmplData();
+
+            AddProductsFromDb();
+        }
 
         public CommonInfoViewModel CommonInfoViewModel
         {
@@ -43,38 +50,42 @@ namespace NutriAppyWPF2.ViewModel
             get => _ProductsListViewModel;
         }
 
-        public BindableBase CurrentViewModel
+        /// <summary>
+        /// For the right side of window
+        /// </summary>
+        public BindableBase RightViewModel
         {
-            get { return _CurrentViewModel; }
-            set { SetProperty(ref _CurrentViewModel, value); }
+            get { return _RightViewModel; }
+            set { SetProperty(ref _RightViewModel, value); }
         }
+        /// <summary>
+        /// For the left side of window
+        /// </summary>
         public BindableBase LeftViewModel
         {
             get { return _LeftViewModel; }
             set { SetProperty(ref _LeftViewModel, value); }
         }
 
+        /// <summary>
+        /// Commands for changing controls in the future
+        /// </summary>
         public MyICommand<string> NavCommand { get; private set; }
         public MyICommand<string> LeftViewNavCommand { get; private set; }
         private void OnNav(string destination)
         {
-            DBLogic dBLogic = new DBLogic();
-            //dBLogic.ReadAllProductIds();
-            //dBLogic.ReadAllProds();
             switch (destination)
             {
                 case "Nutrients":
-                    CurrentViewModel = _ProductsListViewModel;
+                    RightViewModel = ProductsListViewModel;
                     ProductsListViewModel.loadExmplData();
-                    //NutrientViewModel.LoadExampleNutrients();
                     break;
                 case "CommonInfo":
                 default:
-                    CurrentViewModel = _CommonInfoViewModel;
+                    RightViewModel = _CommonInfoViewModel;
                     break;
             }
         }
-
         private void OnLeftNav (string destination)
         {
             switch (destination)
@@ -89,10 +100,12 @@ namespace NutriAppyWPF2.ViewModel
             }
         }
 
+        /// <summary>
+        /// Getting all prerecorded products from database
+        /// </summary>
         private void AddProductsFromDb()
         {
-            DBLogic dBLogic = new DBLogic();
-            PossibleProducts = dBLogic.ReadAllPossibleProducts();
+            PossibleProducts = dbContext.ReadAllPossibleProducts();
         }
     }
 }

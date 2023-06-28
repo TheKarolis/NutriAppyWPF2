@@ -14,12 +14,7 @@ namespace NutriAppyWPF2.ViewModel
         public int CHCKINFO;
         public ObservableCollection<Nutrient> Nutrients { get; set; }
             = new ObservableCollection<Nutrient>();
-
-
-        public NutrientViewModel()
-        {
-
-        }
+        public NutrientViewModel() { }
 
         public void LoadExampleNutrients()
         {
